@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixflow — Idraulico a Codroipo | Urgenze 24/7</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F6F8FA;--ink:#0F1E2E;--muted:#5A6B7C;--line:#DCE3EA;--orange:#FF6B1A;--dark:#0F1E2E}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;width:100%;height:auto}
+h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.05;letter-spacing:-.02em}
+button{font-family:inherit;cursor:pointer;color:inherit}
+*{transition-timing-function:cubic-bezier(.22,1,.36,1)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+@media(max-width:640px){.wrap{padding:0 16px}}
+.reveal{opacity:0;transform:translateY(36px);filter:blur(6px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1),filter .9s}
+.reveal.show{opacity:1;transform:none;filter:blur(0)}
+@keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes heroText{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .4s}
+header.scrolled{box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.nav{max-width:1120px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:padding .4s}
+header.scrolled .nav{padding-top:12px;padding-bottom:12px}
+.logo{font-family:'Archivo',sans-serif;font-size:22px;font-weight:800}.logo span{color:var(--orange)}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
+@media(max-width:820px){.nav-links{display:none}}
+.cart-btn{background:var(--ink);color:#fff;border:0;padding:11px 16px;border-radius:100px;font-weight:600;font-size:14px}
+.hero{position:relative;height:88vh;min-height:560px;overflow:hidden;margin-top:64px}
+@media(max-width:760px){.hero{height:82vh;min-height:520px}}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s cubic-bezier(.22,1,.36,1)}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;animation:heroZoom 6s cubic-bezier(.22,1,.36,1) both}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,.55))}
+.hero-content{position:absolute;inset:0;display:flex;align-items:center;z-index:2}
+.hero-content-inner{max-width:1120px;margin:0 auto;padding:0 20px;width:100%;color:#fff}
+.hero-content-inner h1{font-size:clamp(40px,6vw,66px);animation:heroText .9s cubic-bezier(.22,1,.36,1) both}
+.hero-content-inner h1 em{color:var(--orange);font-style:normal}
+.hero-content-inner p{margin-top:14px;max-width:50ch;opacity:.9;animation:heroText .9s .15s cubic-bezier(.22,1,.36,1) both}
+.hero-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;animation:heroText .9s .3s cubic-bezier(.22,1,.36,1) both}
+@media(max-width:640px){.hero-actions{flex-direction:column}.hero-actions a,.hero-actions button{width:100%;text-align:center}}
+.btn{padding:15px 26px;border-radius:100px;font-weight:700;border:0;font-size:15px;display:inline-block;text-align:center;transition:transform .35s}
+.btn:hover{transform:translateY(-3px) scale(1.02)}
+.btn-orange{background:var(--orange);color:#fff}.btn-white{background:#fff;color:#111}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-dot{width:8px;height:8px;border-radius:100px;background:rgba(255,255,255,.5);border:0;transition:width .5s,background .5s;cursor:pointer}
+.hero-dot.active{width:28px;background:#fff}
+section{padding:52px 0}
+h2{font-size:34px}@media(max-width:640px){h2{font-size:28px}}
+.lead{color:var(--muted);margin-top:10px;max-width:62ch}
+.tabs{position:relative;display:inline-flex;background:#EFE9DC;padding:5px;border-radius:100px;margin-top:20px}
+.tabs button{position:relative;z-index:2;border:0;background:transparent;padding:11px 20px;border-radius:100px;font-weight:700;font-size:14px;transition:color .35s}
+.tabs button.active{color:#fff}
+.tabs-pill{position:absolute;top:5px;bottom:5px;border-radius:100px;background:var(--ink);transition:left .5s cubic-bezier(.22,1,.36,1),width .5s;z-index:1}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+@media(max-width:760px){.menu{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 22px 40px rgba(0,0,0,.12)}
+.card img{width:150px;min-width:150px;min-height:170px;object-fit:cover;transition:transform .8s}
+.card:hover img{transform:scale(1.08)}
+@media(max-width:480px){.card img{width:110px;min-width:110px}}
+.card-body{padding:16px;display:flex;flex-direction:column;flex:1;min-width:0}
+.card-body h3{font-size:19px}.card-body p{font-size:14px;color:var(--muted);margin-top:6px}
+.card-body small{font-size:12.5px;color:var(--orange);font-weight:700;margin-top:8px}
+.card-foot{margin-top:auto;padding-top:11px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:11px}
+.card-foot b{font-size:19px}.card-foot button{background:var(--ink);color:#fff;border:0;padding:9px 14px;border-radius:100px;font-weight:600;font-size:13px}
+.builder{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;align-items:start}
+@media(max-width:860px){.builder{grid-template-columns:1fr}}
+.builder-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.builder-card h3{font-size:18px;margin:16px 0 8px}.builder-card h3:first-child{margin-top:0}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid var(--line);background:#fff;padding:11px 16px;border-radius:100px;font-weight:600;font-size:14px;transition:.35s}
+.chip.active{background:var(--ink);color:#fff;transform:scale(1.03)}
+.chip2{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:100px;font-size:13px;transition:.35s}
+.chip2.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+.summary{background:var(--dark);color:#fff;border-radius:16px;overflow:hidden;position:sticky;top:90px}
+@media(max-width:860px){.summary{position:static}}
+.summary img{height:180px;object-fit:cover}
+.summary-body{padding:18px}.summary-list{margin-top:10px;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}.summary-list div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}
+.summary-total{display:flex;justify-content:space-between;align-items:center;background:#fff;color:#111;padding:12px 14px;border-radius:10px;margin-top:12px}.summary-total b{font-size:22px}
+.summary-body button{width:100%;margin-top:12px;background:var(--orange);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+@media(max-width:760px){.reviews{grid-template-columns:1fr}}
+.review{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;transition:transform .5s}.review:hover{transform:translateY(-4px)}
+.review p{font-size:17px;line-height:1.4;margin:10px 0;font-weight:600}
+.order{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;align-items:start}
+@media(max-width:860px){.order{grid-template-columns:1fr}}
+.order-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.order-box img{height:150px;object-fit:cover;border-radius:10px;margin:12px 0}
+.order-box ul{list-style:none}.order-box li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:14px}
+.form label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}.form label:first-child{margin-top:0}
+.form input{width:100%;padding:13px;border:1px solid var(--line);border-radius:8px;font-size:15px}
+.form input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.form button{width:100%;margin-top:14px;background:var(--orange);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}
+footer{padding:26px 0 110px;border-top:1px solid var(--line)}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot p{font-size:13px;color:var(--muted)}
+.sticky{position:fixed;left:50%;transform:translateX(-50%) translateY(140%);bottom:12px;z-index:60;background:var(--ink);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 16px 32px rgba(0,0,0,.25);transition:transform .55s cubic-bezier(.22,1,.36,1);width:calc(100% - 32px);max-width:520px;padding:12px 12px 12px 16px}
+.sticky.show{transform:translateX(-50%) translateY(0)}
+.sticky-text{flex:1;min-width:0}.sticky-text b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sticky-text span{font-size:12px;opacity:.7}
+.sticky button{background:#fff;color:#111;border:0;padding:11px 16px;border-radius:8px;font-weight:700;white-space:nowrap}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none;opacity:0;transition:opacity .4s}.overlay.open{display:block;opacity:1}
+.cart{position:fixed;top:0;right:0;bottom:0;width:430px;max-width:94vw;background:#fff;z-index:80;transform:translateX(100%);transition:transform .6s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}
+.cart.open{transform:none}
+.cart-head{padding:18px;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}.cart-head button{border:0;background:none;font-size:22px}
+.cart-items{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:11px}
+.cart-item{display:flex;gap:11px;border:1px solid var(--line);border-radius:10px;padding:11px;align-items:center;animation:heroText .5s both}
+.cart-item img{width:58px;height:58px;object-fit:cover;border-radius:8px}.cart-item b{font-size:14px;display:block}.cart-item small{font-size:12px;color:var(--muted)}
+.qty{display:flex;gap:8px;align-items:center;margin-left:auto}.qty button{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:50%;font-weight:800}
+.cart-foot{padding:16px;border-top:1px solid var(--line)}.cart-foot .row{display:flex;justify-content:space-between;font-size:14px;padding:4px 0}.cart-foot .total{font-weight:800;font-size:18px;border-top:1px solid var(--line);margin-top:8px;padding-top:10px}.cart-foot button{width:100%;margin-top:12px}.cart-foot .wa{background:var(--orange);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}.cart-foot .clear{background:none;border:0;color:#888;font-size:12px;margin-top:8px;width:100%}
+</style></head><body>
+<header id="header"><div class="nav"><a class="logo" href="#">Fix<span>flow</span></a><div class="nav-links"><a href="#servizi">Servizi</a><a href="#preventivo">Preventivo</a><a href="#contatti">Contatti</a></div><button class="cart-btn" onclick="openCart()">Richieste <b id="cartCount">0</b></button></div></header>
+<div class="hero">
+  <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80" alt=""><div class="hero-overlay"></div></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1600&q=80" alt=""><div class="hero-overlay"></div></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80" alt=""><div class="hero-overlay"></div></div>
+  <div class="hero-content"><div class="hero-content-inner"><h1 id="heroTitle">Fast Solutions for<br><em>Plumbing Problems</em></h1><p>Perdite, bagni, caldaie. Arriviamo in 60 minuti, preventivo chiaro prima di iniziare.</p><div class="hero-actions"><a class="btn btn-orange" href="tel:+393330000000">Chiama ora — Urgenza</a><button class="btn btn-white" onclick="document.getElementById('servizi').scrollIntoView({behavior:'smooth'})">Vedi servizi</button></div></div></div>
+  <div class="hero-dots"><button class="hero-dot active" onclick="goSlide(0)"></button><button class="hero-dot" onclick="goSlide(1)"></button><button class="hero-dot" onclick="goSlide(2)"></button></div>
+</div>
+<main class="wrap">
+<section id="servizi" class="reveal"><h2>Servizi</h2><p class="lead">Prezzo chiaro. Se non sai cosa ti serve, usa il preventivo qui sotto.</p><div class="tabs" id="tabs"><div class="tabs-pill" id="pill"></div><button class="active" onclick="filterMenu('all',this)">Tutti</button><button onclick="filterMenu('urgenza',this)">Urgenza</button><button onclick="filterMenu('bagno',this)">Bagno</button><button onclick="filterMenu('caldaia',this)">Caldaia</button></div><div class="menu" id="menuGrid"></div></section>
+<section id="preventivo" class="reveal"><h2>Calcola il preventivo</h2><p class="lead">Tre domande. Stima subito, senza impegno.</p><div class="builder"><div class="builder-card"><h3>1. Cosa ti serve?</h3><div class="chip-row"><button class="chip active" onclick="setSize('Perdita',80,this)">Perdita — da €80</button><button class="chip" onclick="setSize('Bagno',150,this)">Bagno — da €150</button><button class="chip" onclick="setSize('Caldaia',90,this)">Caldaia — da €90</button></div><h3>2. È urgente?</h3><div class="chip-row"><button class="chip" onclick="setBase('Oggi',this)">Oggi</button><button class="chip active" onclick="setBase('Entro 2 giorni',this)">Entro 2 giorni</button><button class="chip" onclick="setBase('Urgenza 60 min',this)">Urgenza 60 min + €40</button></div><h3>3. Extra?</h3><div class="chip-row" id="toppings"></div></div><div class="summary"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=900&q=80" alt=""><div class="summary-body"><h3 id="previewTitle">Perdita • Entro 2 giorni</h3><p id="previewDesc" style="font-size:13px;opacity:.8">Sopralluogo incluso.</p><div class="summary-list" id="previewList"></div><div class="summary-total"><span>Stima</span><b id="previewTotal">€80</b></div><button onclick="addCustom()">Aggiungi alla richiesta</button></div></div></div></section>
+<section class="reveal"><h2>Cosa dicono</h2><div class="reviews"><div class="review"><div>★★★★★</div><p>“Perdita in bagno alle 8, alle 9 era già a casa. Preventivo rispettato.”</p><small><b>Marco</b> — Codroipo</small></div><div class="review"><div>★★★★★</div><p>“Caldaia rotta a gennaio. Arrivato in un’ora, caldaia a posto.”</p><small><b>Anna</b> — Codroipo</small></div></div></section>
+<section id="contatti" class="reveal"><h2>Richiedi intervento</h2><div class="order"><div class="order-box"><h3>Fixflow — Codroipo</h3><p style="color:var(--muted);font-size:14px">Idraulico. Casa e aziende.</p><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=900&q=80" alt=""><ul><li><span>Zona</span><b>Codroipo e dintorni</b></li><li><span>Orari</span><b>24/7 urgenze</b></li><li><span>Telefono</span><b>+39 333 000 0000</b></li></ul></div><div class="order-box form"><label>Il tuo nome</label><input id="ordNome" type="text" placeholder="Es. Marco"><label>Telefono</label><input id="ordTel" type="tel" placeholder="+39 333 000 0000"><label>Quando?</label><div class="chip-row" id="oraChips"><button type="button" class="chip active" onclick="setOra(this,'Oggi')">Oggi</button><button type="button" class="chip" onclick="setOra(this,'Domani')">Domani</button><button type="button" class="chip" onclick="setOra(this,'Urgenza')">Urgenza</button></div><input type="hidden" id="ordOra" value="Oggi"><label>Descrivi il problema</label><input id="ordNote" type="text" placeholder="Es. Perde il bagno"><button onclick="quickOrder()">Richiedi intervento</button><p id="ordMsg" style="color:#2F6B3A;font-weight:600;margin-top:10px;display:none"></p></div></div></section>
+</main>
+<footer class="wrap"><div class="foot"><div><p><b>Fixflow</b><br>Codroipo e dintorni<br>Urgenze 24/7</p></div><div><p><b>Contatti</b><br>Tel: +39 333 000 0000<br>WhatsApp: +39 333 000 0000</p></div><div><p>© 2026 Fixflow</p></div></div></footer>
+<div class="sticky" id="stickyBar"><div class="sticky-text"><b id="stickyText">0 richieste • €0</b><span>Preventivo senza impegno</span></div><button onclick="openCart()">Vedi richiesta</button></div>
+<div class="overlay" id="overlay" onclick="closeCart()"></div><div class="cart" id="cart"><div class="cart-head"><h3>La tua richiesta</h3><button onclick="closeCart()">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-foot"><div class="row"><span>Stima</span><b id="cartSub">€0</b></div><div class="row total"><span>Totale stimato</span><b id="cartTotal">€0</b></div><button class="wa" onclick="sendWhatsApp()">Invia su WhatsApp</button><button class="clear" onclick="clearCart()">Svuota</button></div></div>
+<script>
+let slideIdx=0;const slides=document.querySelectorAll('.hero-slide');const dots=document.querySelectorAll('.hero-dot');const titles=["Fast Solutions for<br><em>Plumbing Problems</em>","Bagno rifatto.<br><em>Senza stress.</em>","Caldaia a posto<br><em>in 60 minuti.</em>"];
+function goSlide(n){slideIdx=n;slides.forEach((s,i)=>s.classList.toggle('active',i===n));dots.forEach((d,i)=>d.classList.toggle('active',i===n));document.getElementById('heroTitle').innerHTML=titles[n];}
+setInterval(()=>{goSlide((slideIdx+1)%slides.length)},5000);
+const MENU=[{n:'Perdita rubinetto',d:'Riparazione o sostituzione rubinetto.',tag:'Da 60 min',p:80,c:'urgenza',img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80'},{n:'Scarico intasato',d:'Disotturazione scarico bagno / cucina.',tag:'Urgenza',p:90,c:'urgenza',img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80'},{n:'Rifacimento bagno',d:'Bagno completo, da preventivo.',tag:'Su misura',p:150,c:'bagno',img:'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&q=80'},{n:'Caldaia — manutenzione',d:'Controllo, pulizia, bollino.',tag:'Annuale',p:90,c:'caldaia',img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80'},{n:'Installazione sanitari',d:'WC, bidet, doccia.',tag:'1 giorno',p:200,c:'bagno',img:'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&q=80'},{n:'Caldaia — riparazione',d:'Diagnosi + riparazione.',tag:'Urgenza',p:120,c:'caldaia',img:'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80'}];
+const TOPPINGS=[{n:'Sopralluogo urgente',p:40},{n:'Pezzi inclusi',p:30},{n:'Garanzia 12 mesi',p:0}];
+let curSize='Perdita',curSizePrice=80,curBase='Entro 2 giorni',selected=new Set();let cart=[];let curOra='Oggi';let currentFilter='all';
+function movePill(btn){const pill=document.getElementById('pill');pill.style.left=btn.offsetLeft+'px';pill.style.width=btn.offsetWidth+'px';}
+function renderMenu(){let list=MENU.filter(m=>currentFilter==='all'?true:m.c===currentFilter);document.getElementById('menuGrid').innerHTML=list.map(m=>`<div class="card"><img src="${m.img}"><div class="card-body"><h3>${m.n}</h3><p>${m.d}</p><small>${m.tag}</small><div class="card-foot"><b>da €${m.p}</b><button onclick="addItem('${m.n}',${m.p},'${m.img}')">Aggiungi</button></div></div></div>`).join('');}
+function filterMenu(f,elm){currentFilter=f;document.querySelectorAll('.tabs button').forEach(e=>e.classList.remove('active'));if(elm){elm.classList.add('active');movePill(elm);}renderMenu();}
+renderMenu();setTimeout(()=>{const b=document.querySelector('.tabs button.active');if(b)movePill(b)},100);window.addEventListener('resize',()=>{const b=document.querySelector('.tabs button.active');if(b)movePill(b)});
+function renderToppings(){document.getElementById('toppings').innerHTML=TOPPINGS.map(t=>`<button class="chip2 ${selected.has(t.n)?'active':''}" onclick="toggleTop('${t.n}')">${t.n} ${t.p?'+ €'+t.p:'incluso'}</button>`).join('');}
+function toggleTop(n){if(selected.has(n))selected.delete(n);else selected.add(n);renderToppings();updatePreview();}
+function setSize(s,p,elm){curSize=s;curSizePrice=p;document.querySelectorAll('.builder-card .chip-row .chip').forEach(e=>{if(e.textContent.includes('Perdita')||e.textContent.includes('Bagno')||e.textContent.includes('Caldaia'))e.classList.remove('active')});elm.classList.add('active');updatePreview();}
+function setBase(b,elm){curBase=b;document.querySelectorAll('.builder-card .chip-row .chip').forEach(e=>{if(e.textContent.includes('Oggi')||e.textContent.includes('giorni')||e.textContent.includes('Urgenza'))e.classList.remove('active')});elm.classList.add('active');updatePreview();}
+function calcCustom(){let total=curSizePrice;if(curBase.includes('Urgenza'))total+=40;let lines=[{n:`${curSize} • ${curBase}`,p:curSizePrice+(curBase.includes('Urgenza')?40:0)}];TOPPINGS.forEach(t=>{if(selected.has(t.n)){total+=t.p;lines.push({n:t.n,p:t.p})}});return{total,lines};}
+function updatePreview(){const{total,lines}=calcCustom();document.getElementById('previewTitle').textContent=`${curSize} • ${curBase}`;document.getElementById('previewDesc').textContent=`${Array.from(selected).join(', ')||'Nessun extra'}.`;document.getElementById('previewList').innerHTML=lines.map(l=>`<div><span>${l.n}</span><b>€${l.p}</b></div>`).join('');document.getElementById('previewTotal').textContent='€'+total;}
+function addCustom(){const{total}=calcCustom();addItem(`${curSize} • ${curBase} + ${Array.from(selected).join(', ')}`,total,'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80');}
+renderToppings();updatePreview();
+function addItem(name,price,img){const f=cart.find(i=>i.name===name);if(f)f.qty++;else cart.push({name,price,img,qty:1});renderCart();}
+function renderCart(){const wrap=document.getElementById('cartItems');const count=cart.reduce((a,i)=>a+i.qty,0);document.getElementById('cartCount').textContent=count;if(!cart.length){wrap.innerHTML=`<div style="text-align:center;color:#5A6B7C;padding:30px">Nessuna richiesta.<br>Aggiungi un servizio.</div>`}else{wrap.innerHTML=cart.map((it,idx)=>`<div class="cart-item"><img src="${it.img}"><div style="flex:1"><b>${it.name}</b><small>€${it.price}</small></div><div class="qty"><button onclick="changeQty(${idx},-1)">−</button><b>${it.qty}</b><button onclick="changeQty(${idx},1)">+</button></div><b>€${it.price*it.qty}</b></div>`).join('');}const sub=cart.reduce((a,i)=>a+i.price*i.qty,0);document.getElementById('cartSub').textContent='€'+sub;document.getElementById('cartTotal').textContent='€'+sub;document.getElementById('stickyText').textContent=`${count} richieste • €${sub}`;document.getElementById('stickyBar').classList.toggle('show',count>0);}
+function changeQty(idx,d){cart[idx].qty+=d;if(cart[idx].qty<=0)cart.splice(idx,1);renderCart();}
+function clearCart(){cart=[];renderCart();}
+function openCart(){document.getElementById('cart').classList.add('open');document.getElementById('overlay').classList.add('open')}
+function closeCart(){document.getElementById('cart').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
+function setOra(elm,val){curOra=val;document.querySelectorAll('#oraChips .chip').forEach(c=>c.classList.remove('active'));elm.classList.add('active');document.getElementById('ordOra').value=val;}
+function quickOrder(){const n=document.getElementById('ordNome').value||'Cliente';document.getElementById('ordMsg').style.display='block';document.getElementById('ordMsg').textContent=`Grazie ${n}. Richiesta per ${curOra}. Ti chiamiamo noi.`;}
+function sendWhatsApp(){if(!cart.length){alert('Aggiungi un servizio prima!');return}let txt='Ciao Fixflow! Vorrei un intervento:\n';cart.forEach(i=>{txt+=`• ${i.qty}x ${i.name} — €${i.price*i.qty}\n`});const total=cart.reduce((a,i)=>a+i.price*i.qty,0);txt+=`Stima: €${total}\nQuando: ${curOra}\nNome: ${document.getElementById('ordNome').value||''}\nProblema: ${document.getElementById('ordNote').value||''}`;window.open('https://wa.me/393330000000?text='+encodeURIComponent(txt),'_blank');}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>20);});
+renderCart();
+</script></body></html>
